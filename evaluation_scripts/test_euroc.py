@@ -85,6 +85,7 @@ if __name__ == '__main__':
     parser.add_argument("--image_size", default=[320,512])
     parser.add_argument("--disable_vis", action="store_true")
     parser.add_argument("--stereo", action="store_true")
+    parser.add_argument('--upsample', action="store_true")
 
     parser.add_argument("--beta", type=float, default=0.3)
     parser.add_argument("--filter_thresh", type=float, default=2.4)
@@ -103,7 +104,9 @@ if __name__ == '__main__':
     torch.multiprocessing.set_start_method('spawn')
 
     print("Running evaluation on {}".format(args.datapath))
+    print(args.datapath)
     print(args)
+    images_list = sorted(glob.glob(os.path.join(args.datapath, 'mav0/cam0/data/*.png')))
 
     droid = Droid(args)
     time.sleep(5)
